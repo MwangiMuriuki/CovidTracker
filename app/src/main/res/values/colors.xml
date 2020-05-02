@@ -6,5 +6,16 @@
     <color name="colorWhite">#ffffff</color>
     <color name="textColorPrimary">#2C2C2C</color>
     <color name="layoutBackground">#e4eef2</color>
+    <color name="editTextBG">#e2ebfb</color>
+
+
+    <color name="colorRecovered">#07C927</color>
+    <color name="colorTotalCases">#1a4cff</color>
+    <color name="colorNewCases">#03DAC5</color>
+    <color name="colorActiveCases">#8000FF</color>
+    <color name="colorTotalDeaths">#d70a0a</color>
+    <color name="colorNewDeaths">#FF007F</color>
+    <color name="colorCriticalCases">#E2E200</color>
+
 
 </resources>

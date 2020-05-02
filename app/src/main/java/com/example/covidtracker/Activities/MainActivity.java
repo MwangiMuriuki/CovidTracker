@@ -1,22 +1,30 @@
 package com.example.covidtracker.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -26,6 +34,7 @@ import com.androidnetworking.interfaces.ParsedRequestListener;
 import com.example.covidtracker.Adapters.AdapterCountry;
 import com.example.covidtracker.Config;
 import com.example.covidtracker.ModelClasses.ModelClassCountryData;
+import com.example.covidtracker.ModelClasses.ModelClassGlobal;
 import com.example.covidtracker.R;
 import com.example.covidtracker.databinding.ActivityMainBinding;
 import com.github.mikephil.charting.charts.PieChart;
@@ -50,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private static final String TAG = "My Activity";
     List<ModelClassCountryData> countryDataArrayList = new ArrayList<>();
+    List<ModelClassGlobal> globalDataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
     AdapterCountry adapterCountry;
+
 
     private PieChartData data;
     PieChart chart;
@@ -73,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Covid Tracker");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 
         AndroidNetworking.initialize(getApplicationContext());
 
@@ -83,9 +94,22 @@ public class MainActivity extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(linearLayoutManager);
 
         chart = findViewById(R.id.pieChart);
+        binding.showHideLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (binding.pieChart.getVisibility() == View.VISIBLE){
+                    binding.pieChart.setVisibility(View.GONE);
+                    binding.showHideLabel.setText("Show");
+                }
+                else {
+                    binding.pieChart.setVisibility(View.VISIBLE);
+                    binding.showHideLabel.setText("Hide");
+                }
+            }
+        });
 
 
-        generateData();
         setUpPieChart();
 
         AndroidNetworking.get(Config.BASE_URL + Config.COUNTRY_ENDPOINT)
@@ -122,103 +146,114 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView search_view = (SearchView) item.getActionView();
+
+        search_view.setQueryHint("Search");
+
+        search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterCountry.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         return true;
     }
 
-    private void setUpPieChart() {
-        List<PieEntry> pieEntries = new ArrayList<>();
-
-        //Populate list of colors:
-        int[] My_Colors = {
-                Color.rgb(26, 76, 255),//total cases Blue #1a4cff
-                Color.rgb(215,10,10),//deaths #f01764
-                Color.rgb(127,0,255),//Active cases
-                Color.rgb(7,201,39) //recoveries
-        };
-
-        ArrayList<Integer> colors = new ArrayList<>();
-        for (int c : My_Colors){
-            colors.add(c);
-        }
-
-        for(int i = 0; i<dataValue.length; i++){
-            pieEntries.add(new PieEntry(dataValue[i], dataTitle[i]));
-        }
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, "");
-        dataSet.setColors(My_Colors);
-        dataSet.setHighlightEnabled(true);
-        dataSet.setDrawValues(true);
-        dataSet.setValueTextColor(Color.WHITE);
-        dataSet.setValueTextSize(12);
-        PieData data = new PieData(dataSet);
-
-        Legend legend = chart.getLegend();
-        legend.setTextSize(12);
-        legend.setFormSize(12);
-
-
-        //Populate the chart
-        chart.setData(data);
-        chart.animateY(1200);
-        chart.getDescription().setEnabled(false);
-        chart.setDrawSliceText(false);
-        chart.setHoleRadius(45.0f);
-        chart.setDragDecelerationFrictionCoef(0.98f);
-        chart.setHighlightPerTapEnabled(true);
-        chart.setTransparentCircleColor(Color.WHITE);
-        chart.setTransparentCircleAlpha(110);
-        chart.setTransparentCircleRadius(61f);
-        chart.invalidate();
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
-    private void generateData() {
+    private void setUpPieChart() {
 
-        int numValues = 4;
+        AndroidNetworking.get(Config.BASE_URL + Config.GLOBAL_ENDPOINT)
+                .setTag("all")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsObject(ModelClassGlobal.class, new ParsedRequestListener<ModelClassGlobal>() {
+                    @Override
+                    public void onResponse(ModelClassGlobal response) {
+                        if (response!=null){
+                            float total_cases = response.getCases();
+                            float total_deaths = response.getDeaths();
+                            float active_cases = response.getActive();
+                            float recoveries = response.getRecovered();
 
-        List<SliceValue> values = new ArrayList<SliceValue>();
+                            String dataTitle[] = {"Total Cases", "Total Deaths", "Active Cases", "Recoveries"};
 
-        for (int i = 0; i < numValues; ++i) {
-            SliceValue sliceValue = new SliceValue((float) Math.random() * 30 + 15, ChartUtils.pickColor());
-            SliceValue sliceValue1 = new SliceValue(3364110, ChartUtils.pickColor());
+                            Float dataValue[] = {total_cases, total_deaths, active_cases, recoveries };
 
-            values.add(sliceValue1);
+                            List<PieEntry> pieEntries = new ArrayList<>();
 
-        }
+                            //Populate list of colors:
+                            int[] My_Colors = {
+                                    Color.rgb(26, 76, 255),//total cases #1a4cff
+                                    Color.rgb(215,10,10),//deaths #f01764
+                                    Color.rgb(128,0,255),//Active cases
+                                    Color.rgb(7,201,39) //recoveries
+                            };
 
-        data = new PieChartData(values);
-        data.setHasLabels(hasLabels);
-        data.setHasLabelsOnlyForSelected(hasLabelForSelected);
-        data.setHasLabelsOutside(hasLabelsOutside);
-        data.setHasCenterCircle(hasCenterCircle);
+                            ArrayList<Integer> colors = new ArrayList<>();
+                            for (int c : My_Colors){
+                                colors.add(c);
+                            }
 
-        if (isExploded) {
-            data.setSlicesSpacing(24);
-        }
+                            for(int i = 0; i<dataValue.length; i++){
+                                pieEntries.add(new PieEntry(dataValue[i], dataTitle[i]));
+                            }
 
-        if (hasCenterText1) {
-            data.setCenterText1("Hello!");
+                            PieDataSet dataSet = new PieDataSet(pieEntries, "");
+                            dataSet.setColors(My_Colors);
+                            dataSet.setHighlightEnabled(true);
+                            dataSet.setDrawValues(true);
+                            dataSet.setValueTextColor(Color.WHITE);
+                            dataSet.setValueTextSize(12);
+                            PieData data = new PieData(dataSet);
 
-            // Get roboto-italic font.
-            Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "Roboto-Italic.ttf");
-            data.setCenterText1Typeface(tf);
+                            Legend legend = chart.getLegend();
+                            legend.setTextSize(12);
+                            legend.setFormSize(12);
 
-            // Get font size from dimens.xml and convert it to sp(library uses sp values).
-            data.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
-                    (int) getResources().getDimension(R.dimen.pie_chart_text1_size)));
-        }
+                            //Populate the chart
+                            chart.setData(data);
+                            chart.animateY(1200);
+                            chart.getDescription().setEnabled(false);
+                            chart.setDrawSliceText(false);
+                            chart.setHoleRadius(45.0f);
+                            chart.setDragDecelerationFrictionCoef(0.98f);
+                            chart.setHighlightPerTapEnabled(true);
+                            chart.setTransparentCircleColor(Color.WHITE);
+                            chart.setTransparentCircleAlpha(110);
+                            chart.setTransparentCircleRadius(61f);
+                            chart.invalidate();
 
-        if (hasCenterText2) {
-            data.setCenterText2("Charts (Roboto Italic)");
 
-            Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "Roboto-Italic.ttf");
+                            adapterCountry = new AdapterCountry(getApplicationContext(), countryDataArrayList);
+                            binding.recyclerView.setAdapter(adapterCountry);
 
-            data.setCenterText2Typeface(tf);
-            data.setCenterText2FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
-                    (int) getResources().getDimension(R.dimen.pie_chart_text2_size)));
-        }
+                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
-        binding.chartPie.setPieChartData(data);
+                        }
+
+//                        countryDataArrayList = new AdapterCountry(newLeadsList, getContext());
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(), "Error" + anError, Toast.LENGTH_SHORT).show();
+
+                        Log.e(TAG, "Error fetching Response" + String.valueOf(anError));
+                    }
+                });
 
     }
 
