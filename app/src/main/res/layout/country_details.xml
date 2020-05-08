@@ -95,289 +95,283 @@
 
             </androidx.cardview.widget.CardView>
 
-
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_margin="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="5dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="Tests Conducted:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:gravity="center_vertical"/>
-
-                        <TextView
-                            android:id="@+id/totalTests"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/total_cases_gradient_bg">
 
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorTotalCases"
-                            android:layout_gravity="center_vertical" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="Confimed Cases:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/total_cases"/>
 
                         <TextView
                             android:id="@+id/totalCases"
                             android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:textStyle="normal"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
-
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorNewCases"
-                            android:layout_gravity="center_vertical" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="New Cases Today:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
+                            android:layout_height="wrap_content"
+                            android:text="23500"
                             android:textStyle="bold"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="5dp"/>
-
-                        <TextView
-                            android:id="@+id/newCases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:layout_marginStart="5dp"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
-
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorActiveCases"
-                            android:layout_gravity="center_vertical" />
+                            android:textSize="20dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorTotalCases"/>
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="Active Cases:"
+                            android:layout_height="wrap_content"
+                            android:text="Total Cases"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="5dp"/>
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/textColorSecondary"/>
 
-                        <TextView
-                            android:id="@+id/activeCases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:layout_marginStart="5dp"
-                            android:textSize="16sp"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
-
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorCriticalCases"
-                            android:layout_gravity="center_vertical" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="Critical Cases:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"/>
-
-                        <TextView
-                            android:id="@+id/criticalCases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:layout_marginStart="5dp"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorTotalDeaths"
-                            android:layout_gravity="center_vertical" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="Total Deaths:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="5dp"/>
-
-                        <TextView
-                            android:id="@+id/totalDeaths"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorNewDeaths"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="New Deaths Today:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="5dp"/>
-
-                        <TextView
-                            android:id="@+id/newDeaths"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp">
-
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorRecovered"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="0dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="Recovered:"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="5dp"/>
-
-                        <TextView
-                            android:id="@+id/recoveredCases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:text="123456"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:layout_marginStart="5dp"
-                            android:gravity="center_vertical"/>
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/new_cases_gradient">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/new_today"/>
+
+                        <TextView
+                            android:id="@+id/newCases"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23500"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorNewCases"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="New Cases Today"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/textColorSecondary"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/new_deaths_gradient_bg">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/deaths"/>
+
+                        <TextView
+                            android:id="@+id/newDeaths"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23500"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorTotalDeaths"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="New Deaths Today"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/textColorSecondary"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/active_cases_gradient_bg">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/active"/>
+
+                        <TextView
+                            android:id="@+id/activeCases"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23500"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorActiveCases"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Active Cases"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/textColorSecondary"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/critical_cases_gradient_bg">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/critical"/>
+
+                        <TextView
+                            android:id="@+id/criticalCases"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23500"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorCriticalCases"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Critical Cases"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/textColorSecondary"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/recovered_cases_gradient_bg">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/recovered_icon"/>
+
+                        <TextView
+                            android:id="@+id/recoveredCases"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23500"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorRecovered"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recovered Cases"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/textColorSecondary"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/total_deaths_gradient_bg">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/deaths"/>
+
+                        <TextView
+                            android:id="@+id/totalDeaths"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23500"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorTotalDeaths"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Deaths"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/textColorSecondary"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -41,6 +41,17 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <ProgressBar
+            android:id="@+id/indeterminateBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible"
+            android:elevation="5dp"/>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewGlobal"
             android:layout_width="match_parent"

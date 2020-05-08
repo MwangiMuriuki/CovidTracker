@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
         AndroidNetworking.initialize(getApplicationContext());
 
+        binding.indeterminateBar.bringToFront();
+
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         binding.recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -125,11 +127,9 @@ public class MainActivity extends AppCompatActivity {
                             adapterCountry = new AdapterCountry(getApplicationContext(), countryDataArrayList);
                             binding.recyclerView.setAdapter(adapterCountry);
 
-                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                            binding.indeterminateBar.setVisibility(View.GONE);
 
                         }
-
-//                        countryDataArrayList = new AdapterCountry(newLeadsList, getContext());
 
                     }
 
@@ -235,11 +235,8 @@ public class MainActivity extends AppCompatActivity {
                             chart.setTransparentCircleRadius(61f);
                             chart.invalidate();
 
-
                             adapterCountry = new AdapterCountry(getApplicationContext(), countryDataArrayList);
                             binding.recyclerView.setAdapter(adapterCountry);
-
-                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
                         }
 

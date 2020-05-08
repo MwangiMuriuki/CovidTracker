@@ -102,7 +102,6 @@ public class AdapterCountry extends RecyclerView.Adapter<AdapterCountry.MyViewHo
 
         country_name.setText(countryName);
         continentTV.setText(continent);
-        total_tests.setText(tests);
         total_cases.setText(totalCases);
         new_cases.setText(newCases);
         Active_cases.setText(activeCases);
